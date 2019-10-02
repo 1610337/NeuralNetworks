@@ -7,6 +7,7 @@ Created on Wed Oct  2 12:28:15 2019
 
 import numpy as np
 import matplotlib.pyplot as plt
+import nnwplot
 
 data = np.loadtxt("iris.csv", delimiter=",")
 
@@ -30,24 +31,47 @@ y = X[1,:]
 
 plt.scatter(x, y, c=T, cmap=plt.cm.prism)
 
-def neuron(X):
-    W = [-0.3, 1]
+def neuron(X, W=[-0.3, 1]):
+
     no_Features = 2 # needs to match the size of W !
-    A = 1
+    A = 2
     
     N=X.shape[1]
     net = np.zeros(X.shape[1])
 
-
     for n in range(0,N):
         for j in range(0,no_Features):
-            # add the sum of both the features (see no_Features) to the n'th position
-            # in net
-            
+            # add the sum of both the features (see no_Features) to the n'th position in net
             net[n]+= X[j,n]*W[j]
             # print(X[j,n], "--", W[j])
             
-
     return net > A
 
-lala = neuron(X)
+
+lala = neuron(X, [-0.2,1])
+
+# drop all but the first 2 features
+X = X[:2,:]
+nnwplot.plotTwoFeatures(X,T,neuron)
+
+W=[-0.2,1]
+W=[-0.1,1]
+W=[0,1]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
